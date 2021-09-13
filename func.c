@@ -12,7 +12,7 @@ int valor_medio(int *array, int pos1, int pos2)  {
 		
 		posMedia= (pos1+pos2)/2;
 
-		diferenca = rand() % 500 - 100;
+		diferenca = rand() % 100 - 50;
 
 		array[posMedia] = (array[pos1] + array[pos2])/2 + diferenca;
 
@@ -24,7 +24,7 @@ int valor_medio(int *array, int pos1, int pos2)  {
 
 }
 
-void verificaParametros(int argc, char *argv[], int *tam, char *nomeArquivo){
+void verificaParametros(int argc, char *argv[], int *tam, char **nomeArquivo){
 	
 	int existeD=0, existeO=0;
 
@@ -39,10 +39,10 @@ void verificaParametros(int argc, char *argv[], int *tam, char *nomeArquivo){
 		}
 
 		if (strcmp(argv[i], "-o")==0){
-			nomeArquivo=malloc(strlen(argv[i+1])*sizeof(char));
+			*nomeArquivo=malloc(strlen(argv[i+1])*sizeof(char*));
 
-			strcpy(nomeArquivo, argv[i+1]);
-			nomeArquivo[strlen(argv[i+1])+1]='\0';
+			strcpy(*nomeArquivo, argv[i+1]);
+			(*nomeArquivo)[strlen(argv[i+1])]='\0';
 			existeO++;
 			
 		}
@@ -54,10 +54,36 @@ void verificaParametros(int argc, char *argv[], int *tam, char *nomeArquivo){
 
 	if (existeO==0){
 
-		nomeArquivo=malloc(15*sizeof(char));
-		strcpy(nomeArquivo, "montanhas.ppm");
-		nomeArquivo[15]='\0';
+		*nomeArquivo=malloc(15*sizeof(char*));
+		strcpy(*nomeArquivo, "montanhas.ppm");
+		(*nomeArquivo)[14]='\0';
 
+	}
+	
+}
+
+int diferencaArrays(int *array, int tam){
+	for (size_t a = 0; a < tam-1; a++){
+		if (array[a]-array[a+1]>5){
+
+			array[a]= (array[a]+array[a+1]/2)+3;
+
+		}else if(array[a]-array[a+1]<-5){
+
+			array[a+1]= (array[a]+array[a+1]/2)+3;
+		}
+		
+	}
+	for (size_t b = tam-1; b < 0; b--){
+		if (array[b-1]-array[b]>5){
+
+			array[b-1]= (array[b]+array[b+1]/2)+3;
+
+		}else if(array[b-1]-array[b]<-5){
+
+			array[b]= (array[b]+array[b+1]/2)+3;
+		}
+		
 	}
 	
 }

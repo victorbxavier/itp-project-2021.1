@@ -8,38 +8,46 @@ int main(int argc, char *argv[]) {
   
   int *contorno;
 
-  verificaParametros(argc, argv, &tam, nomeArquivo);
+  PPM dadosArquivo;
 
-  // for(size_t cont=1; cont < argc; cont++)
-  //   printf("%d Parametro: %s\n", cont,argv[cont]);
+  verificaParametros(argc, argv, &tam, &nomeArquivo);
 
-  contorno= malloc(tam * sizeof(int));
+  FILE *arquivo=fopen(nomeArquivo, "wb");
+
+  contorno = malloc(tam * sizeof(int));
 
   srand(time(NULL));
 
-  contorno[0] = rand() % 1000;
-  contorno[tam-1] = rand() % 1000;
+  contorno[0] = rand() % 520;
+  contorno[tam-1] = contorno[0] + (rand() % 100 - 50);
 
   valor_medio(contorno, 0, tam-1);
+  diferencaArrays(contorno, tam);
+
+  strcpy(dadosArquivo.identificador,"P3");
+  dadosArquivo.tamColuna=tam;
+  dadosArquivo.tamAltura=520;
+  dadosArquivo.maxValorPixel=255;
+
+  fprintf(arquivo, "%s\n%d %d\n%d\n", dadosArquivo.identificador, dadosArquivo.tamColuna, dadosArquivo.tamAltura, dadosArquivo.maxValorPixel);
   
-  // for (int i = 0; i < tam; i++)
-  // {
-  //   /* code */
-  //   printf(" %d ", contorno[i]);
-  // }
-  
-  // codigo teste
-  //fprinf(arquivo, "P3\n 1000 \n1000 \n 255 \n");
-  //for(int i=0; i<tamanhoImgHor; i++){
-  //   for(int j=0; j< tamanhoImgVer; j++){
-  //     if(linha>contorno[j]){
-  //        fprintf(arquivo, "119 130 186\n");
-  //      }
-          // else{
-          //   fprintf(arquivo, "159 178 255\n");
-          // }
-  //    }
-  //}
+  for(int i=0; i<dadosArquivo.tamAltura; i++){
+    for(int j=0; j< dadosArquivo.tamColuna; j++){
+
+      if ((i<contorno[j]) && (i%9==0) && (j%17==0)){
+        fprintf(arquivo, "255 255 255\n");
+      }else if(i<contorno[j]){
+         fprintf(arquivo, "25 25 112\n");
+      }else if(i==contorno[j]){
+         fprintf(arquivo, "0 0 0\n");
+      }else{
+         fprintf(arquivo, "70 130 180\n");
+      }
+   
+     }
+  }
+
+  fclose(arquivo);
 
   free(contorno);
   free(nomeArquivo);
