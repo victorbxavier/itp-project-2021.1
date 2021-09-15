@@ -23,13 +23,12 @@ int main(int argc, char *argv[]) {
   if (contorno[0 < 100])  {
     contorno[0] += rand() % 100; 
   }
-  
+
   contorno[tam-1] = contorno[0] + (rand() % 100 - 50);
 
   
   valor_medio(contorno, 0, tam-1);
   diferencaArrays(contorno, tam);
-
   
   
 
