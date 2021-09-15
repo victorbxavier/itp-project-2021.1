@@ -49,7 +49,7 @@ void verificaParametros(int argc, char *argv[], int *tam, char **nomeArquivo){
 	}
 
 	if (existeD==0){
-		*tam=17;
+		*tam=2000;
 	}
 
 	if (existeO==0){
