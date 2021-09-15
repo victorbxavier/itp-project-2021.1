@@ -15,14 +15,23 @@ int main(int argc, char *argv[]) {
   FILE *arquivo=fopen(nomeArquivo, "wb");
 
   contorno = malloc(tam * sizeof(int));
+  
+  srand(time(NULL)); 
 
-  srand(time(NULL));
+  contorno[0] = ((rand()%200) + (rand() % 200));
 
-  contorno[0] = rand() % 700;
+  if (contorno[0 < 100])  {
+    contorno[0] += rand() % 100; 
+  }
+  
   contorno[tam-1] = contorno[0] + (rand() % 100 - 50);
 
+  
   valor_medio(contorno, 0, tam-1);
   diferencaArrays(contorno, tam);
+
+  
+  
 
   strcpy(dadosArquivo.identificador,"P3");
   dadosArquivo.tamColuna=tam;
@@ -34,22 +43,37 @@ int main(int argc, char *argv[]) {
   for(int i=0; i<dadosArquivo.tamAltura; i++){
     for(int j=0; j< dadosArquivo.tamColuna; j++){
 
-      if ((i<contorno[j]) && (i%9==0) && (j%17==0)&& (i<contorno[0]) && (rand() % 2 == 0) && (rand()%5 == 0)){
+      if ((i<contorno[j]) && (i%9==0) && (j%17==0) && (i < contorno[0]) && (rand() % 2 == 0) && (rand()%5 == 0)){
+        //estrelas
         fprintf(arquivo, "255 255 255\n");
       }else if(i<contorno[j]){
-         fprintf(arquivo, "25 25 112\n");
+        int parte = dadosArquivo.tamAltura/5;
+        //degrade do ceu
+        if (i <= parte){ 
+          fprintf(arquivo, "23 30 128\n");
+        }else if (i <= parte*2 && i > parte) {
+          fprintf(arquivo, "27 34 145\n");
+        }else if (i <= parte*3 && i > parte*2) {
+          fprintf(arquivo, "29 37 154\n");
+        }else if(i <= parte*4 && i > parte*3) {
+          fprintf(arquivo, "31 40 164\n");
+        }else {
+          fprintf(arquivo, "34 43 174\n");
+        }  
       }else if(i==contorno[j]){
-         fprintf(arquivo, "0 0 0\n");
+         fprintf(arquivo, "2 4 20\n");
       }else{
-         fprintf(arquivo, "153 76 0\n");
+           fprintf(arquivo, "2 4 20\n");
+     
+        }
       }
    
      }
-  }
   
 
-  fclose(arquivo);
 
+  fclose(arquivo);
+  
   free(contorno);
   free(nomeArquivo);
 
