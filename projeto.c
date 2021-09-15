@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 
   srand(time(NULL));
 
-  contorno[0] = rand() % 520;
+  contorno[0] = rand() % 700;
   contorno[tam-1] = contorno[0] + (rand() % 100 - 50);
 
   valor_medio(contorno, 0, tam-1);
@@ -34,18 +34,19 @@ int main(int argc, char *argv[]) {
   for(int i=0; i<dadosArquivo.tamAltura; i++){
     for(int j=0; j< dadosArquivo.tamColuna; j++){
 
-      if ((i<contorno[j]) && (i%9==0) && (j%17==0)){
+      if ((i<contorno[j]) && (i%9==0) && (j%17==0)&& (i<contorno[0]) && (rand() % 2 == 0) && (rand()%5 == 0)){
         fprintf(arquivo, "255 255 255\n");
       }else if(i<contorno[j]){
          fprintf(arquivo, "25 25 112\n");
       }else if(i==contorno[j]){
          fprintf(arquivo, "0 0 0\n");
       }else{
-         fprintf(arquivo, "70 130 180\n");
+         fprintf(arquivo, "153 76 0\n");
       }
    
      }
   }
+  
 
   fclose(arquivo);
 
