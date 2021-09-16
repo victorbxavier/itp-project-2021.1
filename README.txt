@@ -1,7 +1,9 @@
 O que foi feito
 
 Primeiramente foi feita a criação da função valor_medio, do projeto .c, e o uso da função rand para a primeira,
-a última posição do array contorno e adição do elemento adicional na imagem das estrelas.
+a última posição do array contorno e adição do elemento adicional na imagem das estrelas, degradê no céu e 
+tentativa de amenizar as grandes diferenças entre as colunas.
+
 Feito por Ana Catarina.
 
 Posteriormente foi feita as alterações nos parâmetros da função, criação do .h e .c, 
@@ -12,10 +14,12 @@ Feito por Victor Xavier.
 
 O que não foi feito
 
+Deixar as montanhas de forma mais continua.
+
 O que seria feito diferente
 
 Poderia ter sido usado consts e externs com relação ao typedef struct PPM, mas que não foi usado por não saber
-tão bem esses conceitos.
+tão bem esses conceitos e usar funções de impressão para o main não ficar com tanto código.
 
 Como compilar o projeto
 
